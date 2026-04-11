@@ -9,6 +9,12 @@ export default function EnrollmentsRoutes(app) {
     res.json(enrollments);
   };
 
+  const findUsersForCourse = async (req, res) => {
+    const { cid } = req.params;
+    const users = await dao.findUsersForCourse(cid);
+    res.json(users);
+  }
+
   const enrollUserInCourse = async (req, res) => {
     let { userId, courseId } = req.params;
     if (userId === "current") {
@@ -37,6 +43,7 @@ export default function EnrollmentsRoutes(app) {
     res.send(status);
   };
 
+  app.get("/api/courses/:cid/users", findUsersForCourse);
   app.get("/api/users/:userId/enrollments", findEnrollmentsForUser);
   app.post("/api/users/:userId/courses/:courseId", enrollUserInCourse);
   app.delete("/api/users/:userId/courses/:courseId", unenrollUserFromCourse);

@@ -26,6 +26,10 @@ export default function EnrollmentsDao() {
   function unenrollAllusersFromCourse(courseId) {
     return model.deleteMany({ course: courseId });
   }
+
+  function unenrollUserFromAllCourses(userId) {
+    return model.deleteMany({ user: userId });
+  }
   
   return { 
     findCoursesForUser, 
@@ -33,5 +37,6 @@ export default function EnrollmentsDao() {
     enrollUserInCourse, 
     unenrollUserInCourse, 
     unenrollAllusersFromCourse,
+    unenrollUserFromAllCourses,
   };
 }

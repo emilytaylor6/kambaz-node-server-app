@@ -1,4 +1,5 @@
 import UsersDao from "./dao.js";
+import EnrollmentsDao from "../enrollments/dao.js";
 
 export default function UserRoutes(app) {
  const dao = UsersDao();
@@ -7,9 +8,12 @@ export default function UserRoutes(app) {
     res.json(user);
   };
 
+  const enrollmentsDao = EnrollmentsDao();
+
   const deleteUser = async (req, res) => {
-      const status = await dao.deleteUser(req.params.userId);
-      res.json(status);
+    await enrollmentsDao.unenrollUserFromAllCourses(req.params.userId);
+    const status = await dao.deleteUser(req.params.userId);
+    res.json(status);
   };
 
   const findAllUsers = async (req, res) => {
