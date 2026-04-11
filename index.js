@@ -37,9 +37,9 @@ if (process.env.SERVER_ENV !== "development") {
 app.use(session(sessionOptions));
 
 app.use(express.json()); // this line after configuring cors and session but before routes
-UserRoutes(app, db);
+UserRoutes(app);
 CourseRoutes(app, db);
-ModulesRoutes(app, db);
+ModulesRoutes(app);
 AssignmentRoutes(app, db);
 EnrollmentsRoutes(app, db);
 Lab5(app);
