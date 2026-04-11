@@ -9,7 +9,7 @@ export default function EnrollmentsRoutes(app) {
     res.json(enrollments);
   };
 
-  const enrollUserInCourse = (req, res) => {
+  const enrollUserInCourse = async (req, res) => {
     let { userId, courseId } = req.params;
     if (userId === "current") {
       const currentUser = req.session["currentUser"];
@@ -19,11 +19,11 @@ export default function EnrollmentsRoutes(app) {
       }
       userId = currentUser._id;
     }
-    const status = dao.enrollUserInCourse(userId, courseId);
+    const status = await dao.enrollUserInCourse(userId, courseId);
     res.send(status);
   };
 
-  const unenrollUserFromCourse = (req, res) => {
+  const unenrollUserFromCourse = async (req, res) => {
     let { userId, courseId } = req.params;
     if (userId === "current") {
       const currentUser = req.session["currentUser"];
@@ -33,7 +33,7 @@ export default function EnrollmentsRoutes(app) {
       }
       userId = currentUser._id;
     }
-    const status = dao.unenrollUserInCourse(userId, courseId);
+    const status = await dao.unenrollUserInCourse(userId, courseId);
     res.send(status);
   };
 
