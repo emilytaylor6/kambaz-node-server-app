@@ -40,7 +40,7 @@ app.use(express.json()); // this line after configuring cors and session but bef
 UserRoutes(app);
 CourseRoutes(app);
 ModulesRoutes(app);
-AssignmentRoutes(app, db);
+AssignmentRoutes(app);
 EnrollmentsRoutes(app);
 Lab5(app);
 Hello(app);
