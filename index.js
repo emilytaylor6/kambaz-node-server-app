@@ -38,10 +38,10 @@ app.use(session(sessionOptions));
 
 app.use(express.json()); // this line after configuring cors and session but before routes
 UserRoutes(app);
-CourseRoutes(app, db);
+CourseRoutes(app);
 ModulesRoutes(app);
 AssignmentRoutes(app, db);
-EnrollmentsRoutes(app, db);
+EnrollmentsRoutes(app);
 Lab5(app);
 Hello(app);
 app.listen(process.env.PORT || 4000);
