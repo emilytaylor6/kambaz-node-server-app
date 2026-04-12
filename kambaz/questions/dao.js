@@ -49,7 +49,7 @@ export default function QuestionsDao() {
      * @returns all questions deleted in the given course
      */
     function deleteAllQuestionsForQuiz(quizId) {
-        return model.deleteMany({ course: quizId });
+        return model.deleteMany({ quiz: quizId });
     }
 
     return { 
