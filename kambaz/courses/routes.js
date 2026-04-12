@@ -1,6 +1,7 @@
 import CoursesDao from "./dao.js";
 import EnrollmentsDao from "../enrollments/dao.js";
 import AssignmentsDao from "../assignments/dao.js";
+import QuizzesDao from "../quizzes/dao.js";
 
 export default function CourseRoutes(app) {
   const dao = CoursesDao();
@@ -34,11 +35,13 @@ export default function CourseRoutes(app) {
   };
 
   const assignmentsDao = AssignmentsDao();
+  const quizzesDao = QuizzesDao();
 
   const deleteCourse = async (req, res) => {
     const { courseId } = req.params;
     await enrollmentsDao.unenrollAllusersFromCourse(courseId);
     await assignmentsDao.deleteAllAssignmentsForCourse(courseId);
+    await quizzesDao.deleteAllQuizzesForCourse(courseId);
     const status = await dao.deleteCourse(courseId);
     res.send(status);
   }

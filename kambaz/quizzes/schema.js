@@ -17,6 +17,7 @@ const quizzesSchema = new mongoose.Schema({
         enum: ["QUIZZES", "EXAMS", "ASSIGNMENTS", "PROJECTS"], 
         default: "QUIZZES"
     }, 
+    isPublished: { type: Boolean, default: false },
     isShuffled: { type: Boolean, default: true },
     timeLimit: { type: Number, default: 20 }, // in minutes
     hasMultipleAttempts: { type: Boolean, default: false },
