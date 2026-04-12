@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import Hello from './Hello.js';
 import Lab5 from './Lab5/index.js';
 import cors from "cors";
-import db from "./kambaz/database/index.js";
 import UserRoutes from './kambaz/users/routes.js';
 import "dotenv/config";
 import session from "express-session";
@@ -11,6 +10,9 @@ import CourseRoutes from './kambaz/courses/routes.js';
 import ModulesRoutes from './kambaz/modules/routes.js';
 import AssignmentRoutes from './kambaz/assignments/routes.js';
 import EnrollmentsRoutes from './kambaz/enrollments/routes.js';
+import QuestionsRoutes from './kambaz/questions/routes.js';
+import QuizAttemptsRoutes from './kambaz/quizAttempts/routes.js';
+import QuizzesRoutes from './kambaz/quizzes/routes.js';
 
 const CONNECTION_STRING = process.env.DATABASE_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
 mongoose.connect(CONNECTION_STRING);
@@ -42,6 +44,9 @@ CourseRoutes(app);
 ModulesRoutes(app);
 AssignmentRoutes(app);
 EnrollmentsRoutes(app);
+QuestionsRoutes(app);
+QuizAttemptsRoutes(app);
+QuizzesRoutes(app);
 Lab5(app);
 Hello(app);
 app.listen(process.env.PORT || 4000);
