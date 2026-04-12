@@ -13,6 +13,6 @@ const quizAttemptsSchema = new mongoose.Schema({
     isCorrect: Boolean,
    }],
  },
- { collection: "quizzes" }
+ { collection: "quizAttempts" }
 );
 export default quizAttemptsSchema;
