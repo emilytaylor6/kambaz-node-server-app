@@ -58,7 +58,7 @@ export default function QuizAttemptsRoutes(app) {
 
     app.post("/api/quizzes/:quizId/attempts", createAttemptForQuiz);
     app.get("/api/quizzes/:quizId/attempts", findAttemptsForQuiz);
+    app.get("/api/quizzes/:quizId/attempts/user/:userId", findAttemptsForUser);
     app.delete("/api/attempts/:attemptId", deleteAttempt);
     app.put("/api/attempts/:attemptId", updateAttempt);
-    app.get("/api/quizzes/:quizId/attempts/user/:userId", findAttemptsForUser);
 }
