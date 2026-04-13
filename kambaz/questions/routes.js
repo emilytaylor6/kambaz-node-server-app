@@ -47,8 +47,8 @@ export default function QuestionsRoutes(app) {
         res.send(status);
     }
 
-    app.post("/api/quizzes/:quizId/question", createQuestionForQuiz);
-    app.get("/api/quizzes/:quizId/question", findQuestionsForQuiz);
-    app.delete("/api/quizzes/:quizId/question/:questionId", deleteQuestion);
-    app.put("/api/quizzes/:quizId/question/:questionId", updateQuestion);
+    app.post("/api/quizzes/:quizId/questions", createQuestionForQuiz);
+    app.get("/api/quizzes/:quizId/questions", findQuestionsForQuiz);
+    app.delete("/api/questions/:questionId", deleteQuestion);
+    app.put("/api/questions/:questionId", updateQuestion);
 }

@@ -19,8 +19,8 @@ export default function QuizAttemptsRoutes(app) {
      * finds all the attempts for a user 
      */
     const findAttemptsForUser = async (req, res) => {
-        const { userId } = req.params;
-        const attempts = await dao.findAttemptsForUser(userId);
+        const { quizId, userId } = req.params;
+        const attempts = await dao.findAttemptsForUser(quizId, userId);
         res.json(attempts);
     }
 
@@ -58,7 +58,7 @@ export default function QuizAttemptsRoutes(app) {
 
     app.post("/api/quizzes/:quizId/attempts", createAttemptForQuiz);
     app.get("/api/quizzes/:quizId/attempts", findAttemptsForQuiz);
-    app.get("/api/quizzes/:quizId/attempts/:userId", findAttemptsForUser);
-    app.delete("/api/quizzes/:quizId/attempts/:attemptId", deleteAttempt);
-    app.put("/api/quizzes/:quizId/attempts/:attemptId", updateAttempt);
+    app.delete("/api/attempts/:attemptId", deleteAttempt);
+    app.put("/api/attempts/:attemptId", updateAttempt);
+    app.get("/api/quizzes/:quizId/attempts/user/:userId", findAttemptsForUser);
 }

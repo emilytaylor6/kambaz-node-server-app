@@ -20,7 +20,7 @@ export default function QuizAttemptsDao() {
      * @returns the attempts for the given user
      */
     async function findAttemptsForUser(userId) {
-        return await model.find({ user: userId });
+        return await model.find({ quiz: quizId, user: userId });
     }
 
     /**
