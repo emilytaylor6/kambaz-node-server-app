@@ -6,6 +6,7 @@ const quizzesSchema = new mongoose.Schema({
     title: String,
     description: String,
     points: { type: Number, default: 0 },
+    questionCount: { type: Number, default: 0 },
     quizType: { 
         type: String,
         enum: ["Graded Quiz", "Practice Quiz", "Graded Survey", "Ungraded Survey"],

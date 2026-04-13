@@ -39,8 +39,8 @@ export default function QuizzesDao() {
      * @param quizUpdates the fields of the quiz to be updated
      * @returns the updated quiz 
      */
-    function updateQuiz(quizId, quizUpdates) {
-        return model.updateOne({ _id: quizId }, { $set: quizUpdates });
+    async function updateQuiz(quizId, quizUpdates) {
+        return await model.updateOne({ _id: quizId }, { $set: quizUpdates });
     }
 
     /**
@@ -48,8 +48,26 @@ export default function QuizzesDao() {
      * @param courseId the course if for all quizzes to be deleted
      * @returns all quizzes deleted in the given course
      */
-    function deleteAllQuizzesForCourse(courseId) {
-        return model.deleteMany({ course: courseId });
+    async function deleteAllQuizzesForCourse(courseId) {
+        return await model.deleteMany({ course: courseId });
+    }
+
+    /**
+     * increases the question count of the given quiz by one
+     * @param quizId the given quiz id
+     * @returns the quiz with the increased question count
+     */
+    async function incQuestionCount(quizId) {
+        return await model.updateOne({ _id: quizId }, { $inc: { questionCount : 1 } });
+    }
+
+    /**
+     * decreases the question count of the given quiz by one
+     * @param quizId the given quiz id
+     * @returns the quiz with the decreased question count
+     */
+    async function decQuestionCount(quizId) {
+        return await model.updateOne({ _id: quizId }, { $inc: { questionCount : -1 } });
     }
 
     return { 
@@ -58,5 +76,7 @@ export default function QuizzesDao() {
         deleteQuiz,
         updateQuiz,
         deleteAllQuizzesForCourse,
+        incQuestionCount,
+        decQuestionCount,
     };
 }

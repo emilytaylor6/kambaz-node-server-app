@@ -15,6 +15,15 @@ export default function QuestionsDao() {
     }
 
     /**
+     * finds the question at the given id
+     * @param questionId the given question id
+     * @returns the question at the given id
+     */
+    async function findQuestionById(questionId) {
+        return await model.find(questionId);
+    }
+
+    /**
      * creates a question in the database
      * @param question the question object propagated with its fields to be added to the database
      * @returns the created question object
@@ -39,8 +48,8 @@ export default function QuestionsDao() {
      * @param questionUpdates the fields of the question to be updated
      * @returns the updated question 
      */
-    function updateQuestion(questionId, questionUpdates) {
-        return model.updateOne({ _id: questionId }, { $set: questionUpdates });
+    async function updateQuestion(questionId, questionUpdates) {
+        return await model.updateOne({ _id: questionId }, { $set: questionUpdates });
     }
 
     /**
@@ -48,12 +57,13 @@ export default function QuestionsDao() {
      * @param quizId the quiz id for all questions to be deleted
      * @returns all questions deleted in the given course
      */
-    function deleteAllQuestionsForQuiz(quizId) {
-        return model.deleteMany({ quiz: quizId });
+    async function deleteAllQuestionsForQuiz(quizId) {
+        return await model.deleteMany({ quiz: quizId });
     }
 
     return { 
         findQuestionsForQuiz, 
+        findQuestionById,
         createQuestion, 
         deleteQuestion,
         updateQuestion,

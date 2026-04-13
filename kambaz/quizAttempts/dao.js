@@ -48,8 +48,8 @@ export default function QuizAttemptsDao() {
      * @param attemptUpdates the fields of the attempt to be updated
      * @returns the updated attempt 
      */
-    function updateAttempt(questionId, questionUpdates) {
-        return model.updateOne({ _id: questionId }, { $set: questionUpdates });
+    async function updateAttempt(questionId, questionUpdates) {
+        return await model.updateOne({ _id: questionId }, { $set: questionUpdates });
     }
 
     /**
@@ -57,8 +57,8 @@ export default function QuizAttemptsDao() {
      * @param quizId the quiz id for all attempts to be deleted
      * @returns all attempts deleted in the given course
      */
-    function deleteAllAttemptsForQuiz(quizId) {
-        return model.deleteMany({ quiz: quizId });
+    async function deleteAllAttemptsForQuiz(quizId) {
+        return await model.deleteMany({ quiz: quizId });
     }
 
     return { 
