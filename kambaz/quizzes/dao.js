@@ -15,6 +15,15 @@ export default function QuizzesDao() {
     }
 
     /**
+     * finds the quiz at the given id
+     * @param quizId the given quiz id
+     * @returns the quiz at the given id
+     */
+    async function findQuizById(quizId) {
+        return await model.findById(quizId);
+    }
+
+    /**
      * creates a quiz in the database
      * @param quiz the quiz object propagated with its fields to be added to the database
      * @returns the created quiz object
@@ -72,6 +81,7 @@ export default function QuizzesDao() {
 
     return { 
         findQuizzesForCourse, 
+        findQuizById,
         createQuiz, 
         deleteQuiz,
         updateQuiz,

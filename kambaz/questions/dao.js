@@ -20,7 +20,7 @@ export default function QuestionsDao() {
      * @returns the question at the given id
      */
     async function findQuestionById(questionId) {
-        return await model.find(questionId);
+        return await model.findById(questionId);
     }
 
     /**
