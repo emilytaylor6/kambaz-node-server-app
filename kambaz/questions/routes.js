@@ -28,6 +28,7 @@ export default function QuestionsRoutes(app) {
         };
         const newQuestion = await dao.createQuestion(question);
         await quizzesDao.incQuestionCount(quizId);
+        await quizzesDao.addPointsToQuiz(quizId, question.points);
         res.send(newQuestion);
     }
 
@@ -39,6 +40,7 @@ export default function QuestionsRoutes(app) {
         const question = await dao.findQuestionById(questionId);
         const status = await dao.deleteQuestion(questionId);
         await quizzesDao.decQuestionCount(question.quiz);
+        await quizzesDao.removePointsFromQuiz(question.quiz, question.points);
         res.send(status);
     }
 
@@ -48,7 +50,18 @@ export default function QuestionsRoutes(app) {
     const updateQuestion = async (req, res) => {
         const { questionId } = req.params;
         const questionUpdates = req.body;
+
+        const oldQuestion = await dao.findQuestionById(questionId);
         const status = await dao.updateQuestion(questionId, questionUpdates);
+
+        if (questionUpdates.points !== undefined && questionUpdates.points !== oldQuestion.points) {
+            const pointDifference = questionUpdates.points - oldQuestion.points;
+            if (pointDifference > 0) {
+                await quizzesDao.addPointsToQuiz(oldQuestion.quiz, pointDifference);
+            } else {
+                await quizzesDao.removePointsFromQuiz(oldQuestion.quiz, Math.abs(pointDifference))
+            }
+        }
         res.send(status);
     }
 

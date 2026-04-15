@@ -71,12 +71,32 @@ export default function QuizzesDao() {
     }
 
     /**
+     * increases the point count of the given quiz by the given number of points
+     * @param quizId the given quiz id
+     * @param points the number of points to add
+     * @returns the quiz with the increased question count
+     */
+    async function addPointsToQuiz(quizId, points) {
+        return await model.updateOne({ _id: quizId }, { $inc: { points : points } });
+    }
+
+    /**
      * decreases the question count of the given quiz by one
      * @param quizId the given quiz id
-     * @returns the quiz with the decreased question count
+     * @returns the quiz with the decreased point count
      */
     async function decQuestionCount(quizId) {
         return await model.updateOne({ _id: quizId }, { $inc: { questionCount : -1 } });
+    }
+
+    /**
+     * decreases the point count of the given quiz by the given number of points
+     * @param quizId the given quiz id
+     * @param points the number of points to add
+     * @returns the quiz with the decreased point count
+     */
+    async function removePointsFromQuiz(quizId, points) {
+        return await model.updateOne({ _id: quizId }, { $inc: { points : -points } });
     }
 
     return { 
@@ -88,5 +108,7 @@ export default function QuizzesDao() {
         deleteAllQuizzesForCourse,
         incQuestionCount,
         decQuestionCount,
+        addPointsToQuiz,
+        removePointsFromQuiz,
     };
 }
